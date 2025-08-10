@@ -11,9 +11,13 @@ image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
-modules:
-  - type: akmods
-    install:
-      - kvmfr
+stages:
+  - name: akmods
+    from: ghcr.io/ublue-os/akmods
+    modules: # same as the top-level modules key, but executed in the custom stage
+      - type: akmods
+        install:
+          - kvmfr
 
+modules:
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
